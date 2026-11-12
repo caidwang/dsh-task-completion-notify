@@ -1,0 +1,3 @@
+- insert:
+    - id: task-completion-notify
+      name: '@local/task-completion-notify'

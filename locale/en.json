@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Task completion notify",
+    "description": "Pops up a toast and plays a chime when an agent finishes a task."
+  }
+}
