@@ -1,43 +1,43 @@
 # dsh-task-completion-notify
 
-DeepSeek Harness(dsh)Web GUI 的**任务完成通知插件**:当一个会话的智能体完成任务(一个回合结束)时,在界面右下角弹出 toast 并播放一段短提示音。
+English | [中文](README.zh.md)
 
-A task-completion notifier plugin for the DeepSeek Harness Web GUI: pops up a toast and plays a short chime when an agent finishes a task (turn).
+A task-completion notifier plugin for the DeepSeek Harness (dsh) Web GUI: when an agent finishes a task (turn) in a session, a toast pops up at the bottom-right of the window and a short chime plays.
 
-## 功能
+## Features
 
-- 会话任务结束时,右下角弹出通知卡片(带会话标题,6 秒自动消失,点击可提前关闭,最多叠 3 条)
-- 播放两音提示音(E5 → A5),由 Web Audio 现场合成,不携带任何音频文件
-- 覆盖会话列表中的全部会话:当前会话、后台会话、子代理与会话团队成员
-- 中英文界面文案;样式全部使用宿主主题 token,自动适配明暗模式
-- 客户端插件(Host 半边为 no-op),不影响会话日志与模型行为
+- **Completion toast** — a card at the bottom-right showing the session title; auto-dismisses after 6 s, click to dismiss early, up to 3 stacked
+- **Chime** — a short two-note tone (E5 → A5) synthesized on the fly with Web Audio; no audio assets in the bundle
+- **Covers every session** — the current session, background sessions, subagent sessions, and agent-team sessions
+- **Localized** — English and Chinese UI copy; styling uses host theme tokens, so light/dark mode follows the app automatically
+- **Client-only** — the Host half is a no-op; no session-log or model-behavior changes
 
-## 安装
+## Installation
 
-用 agent 的 `plugin_manager` 工具(或 Web 端插件管理)安装本目录:
+Install this directory (or the published npm package) through the agent's `plugin_manager` tool or the Web plugin management UI:
 
 ```text
-plugin_manager action=install_bundle target=<本目录的绝对路径>
+plugin_manager action=install_bundle target=<absolute path to this directory>
 ```
 
-安装后当前 profile 的所有会话立即生效,重启后仍然保留。
+Once installed, the plugin is live for every session in the current profile and survives restarts.
 
-## 触发条件
+## How it triggers
 
-会话列表行(`ctx.sessions.list`)的 `running` 状态从 `true` 翻转为 `false`。该状态源已整合 Host 的 `api-session/status` 实时事件与连接基线刷新,因此重连、页面刷新后也能正确工作;首次基线到达不会误报。
+A notification fires when a session-list row's `running` state flips from `true` to `false`. That state source already merges the Host's live `api-session/status` events with connection-baseline refreshes, so reconnects and page reloads stay correct, and the initial baseline never false-alarms.
 
-## 文件
+## Files
 
-| 文件 | 作用 |
+| File | Purpose |
 |---|---|
-| `package.json` | 包清单,`dsh.bundle.patch` 与 `dsh.client` 声明 |
-| `cordis.patch.yml` | Loader 补丁:插入插件行 |
-| `index.js` | Host 半边(no-op) |
-| `client.js` | 客户端半边:状态检测、toast 渲染、提示音合成 |
-| `locale/*.json` | 插件列表展示元数据(标题/描述) |
-| `icon.svg` | 插件图标 |
+| `package.json` | Package manifest: `dsh.bundle.patch` and `dsh.client` declarations |
+| `cordis.patch.yml` | Loader patch that inserts the plugin row |
+| `index.js` | Host half (no-op) |
+| `client.js` | Client half: state detection, toast rendering, chime synthesis |
+| `locale/*.json` | Plugin-inventory display metadata (title/description) |
+| `icon.svg` | Plugin icon |
 
-## 备注
+## Notes
 
-- 在桌面 App(Electron)中提示音可直接播放;在普通浏览器中,自动播放策略可能要求页面先有过一次用户交互。
-- 包名为 `@local/task-completion-notify`,以本地目录链接方式安装(`files` 不筛选链接目录)。
+- In the desktop app (Electron) the chime plays directly; in an ordinary browser, autoplay policy may require one user interaction with the page first.
+- The package installs as a local directory link; `files` does not filter a linked directory.
