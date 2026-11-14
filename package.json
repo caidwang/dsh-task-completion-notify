@@ -1,9 +1,14 @@
 {
-  "name": "@local/task-completion-notify",
+  "name": "@xconekade/task-completion-notify",
   "version": "1.0.0",
-  "private": true,
   "type": "module",
-  "description": "Pops up a toast and plays a chime when an agent finishes a task.",
+  "description": "Pops up a toast and plays a chime when an agent finishes a task. Task-completion notifier plugin for the DeepSeek Harness (dsh) Web GUI.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caidwang/dsh-task-completion-notify.git"
+  },
+  "keywords": ["deepseek-harness", "dsh", "plugin", "cordis", "notification", "toast"],
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",
@@ -11,6 +16,10 @@
     "./icon": "./icon.svg"
   },
   "files": ["index.js", "client.js", "cordis.patch.yml", "locale/*.json", "icon.svg"],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "dsh": {
     "bundle": { "patch": "./cordis.patch.yml" },
     "client": {
