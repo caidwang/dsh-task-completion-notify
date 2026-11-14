@@ -14,13 +14,19 @@ DeepSeek Harness(dsh)Web GUI 的**任务完成通知插件**:当某个会话的�
 
 ## 安装
 
-通过 agent 的 `plugin_manager` 工具或 Web 端插件管理界面安装本目录(或已发布的 npm 包):
+**从 npm 安装** — 已发布为 [`@xconekade/task-completion-notify`](https://www.npmjs.com/package/@xconekade/task-completion-notify):
+
+```text
+plugin_manager action=install_bundle target="@xconekade/task-completion-notify"
+```
+
+**从本地检出安装**(本目录):
 
 ```text
 plugin_manager action=install_bundle target=<本目录的绝对路径>
 ```
 
-安装后,当前 profile 的所有会话立即生效,重启后仍然保留。
+通过 agent 的 `plugin_manager` 工具或 Web 端插件管理界面执行。安装后,当前 profile 的所有会话立即生效,重启后仍然保留。
 
 ## 触发条件
 
@@ -40,4 +46,4 @@ plugin_manager action=install_bundle target=<本目录的绝对路径>
 ## 备注
 
 - 桌面 App(Electron)中提示音可直接播放;在普通浏览器中,自动播放策略可能要求页面先有过一次用户交互。
-- 包以本地目录链接方式安装;`files` 不筛选链接目录。
+- 本地检出以目录链接方式安装;`files` 不筛选链接目录。

@@ -14,13 +14,19 @@ A task-completion notifier plugin for the DeepSeek Harness (dsh) Web GUI: when a
 
 ## Installation
 
-Install this directory (or the published npm package) through the agent's `plugin_manager` tool or the Web plugin management UI:
+**From npm** — published as [`@xconekade/task-completion-notify`](https://www.npmjs.com/package/@xconekade/task-completion-notify):
+
+```text
+plugin_manager action=install_bundle target="@xconekade/task-completion-notify"
+```
+
+**From a local checkout** (this directory):
 
 ```text
 plugin_manager action=install_bundle target=<absolute path to this directory>
 ```
 
-Once installed, the plugin is live for every session in the current profile and survives restarts.
+Run it through the agent's `plugin_manager` tool or the Web plugin management UI. Once installed, the plugin is live for every session in the current profile and survives restarts.
 
 ## How it triggers
 
@@ -40,4 +46,4 @@ A notification fires when a session-list row's `running` state flips from `true`
 ## Notes
 
 - In the desktop app (Electron) the chime plays directly; in an ordinary browser, autoplay policy may require one user interaction with the page first.
-- The package installs as a local directory link; `files` does not filter a linked directory.
+- A local checkout installs as a directory link; `files` does not filter a linked directory.
